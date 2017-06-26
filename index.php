@@ -10,7 +10,7 @@
 	echo 'Connected to MySQL Successfully!';
 	echo 'Your IP Address is: $_SERVER["REMOTE_ADDR"]';
 
-	$result = mysqli_query($con,"SELECT * FROM Messages");
+	$result = mysqli_query($conn,"SELECT * FROM Messages");
 
 	echo "<table border='1'>
 	<tr>
