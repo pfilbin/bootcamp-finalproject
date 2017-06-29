@@ -1,32 +1,29 @@
 <?php
-	$dbhost = 'bootcamp.coqxothtgwj0.us-west-2.rds.amazonaws.com';
-	$dbuser = 'pfilbin';
-	$dbpass = 'kibocommerce';
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass);
-	if(! $conn )
-	{
-	  die('Could not connect to instance: ' . mysqli_error($conn));
-	}
-	echo 'Connected to MySQL Successfully!';
-	echo 'Your IP Address is: $_SERVER["REMOTE_ADDR"]';
+        $link = mysqli_connect("bootcamp.coqxothtgwj0.us-west-2.rds.amazonaws.com", "pfilbin", "kibocommerce");
 
-	$result = mysqli_query($conn,"SELECT * FROM Messages");
+        if (!$link) {
+        echo "Error: Unable to connect to MySQL." . PHP_EOL;
+        echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+        echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+        exit;
+        }
 
-	echo "<table border='1'>
-	<tr>
-	<th>MSGID</th>
-	<th>Message</th>
-	</tr>";
+        echo "Connected to MySQL Successfully! <br> <br> Your IP Address is: $_SERVER[REMOTE_ADDR]<br>";
 
-	while($row = mysqli_fetch_array($result))
-	{
-	echo "<tr>";
-	echo "<td>" . $row['MSGID'] . "</td>";
-	echo "<td>" . $row['Message'] . "</td>";
-	echo "</tr>";
-	}
-	echo "</table>";
 
-	mysql_close($conn);
+        $result = mysqli_query($link,"Select * From BootcampTable.Messages");
+        $feedback .= "<table border='1'><tr>";
+        $feedback .= "<th>MSGID</th><th>Message</th></tr>";
+
+        while ($row = mysqli_fetch_array($result))
+        {
+        $feedback .= "<tr><td>" . $row['MSGID'] . "</td>";
+        $feedback .= "<td>" . $row['Message'] . "</td></tr>";
+        }
+
+        $feedback .= "</table>";
+
+        echo $feedback;
+
+        mysqli_close($link);
 ?>
-
