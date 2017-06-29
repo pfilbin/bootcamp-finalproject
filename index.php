@@ -8,7 +8,7 @@
         exit;
         }
 
-        echo "Connected to MySQL Successfully! <br> <br> Your IP Address is: $_SERVER[REMOTE_ADDR]<br>";
+        echo "Connected to MySQL Successfully! <br> <br> Your IP Address is: $_SERVER[SERVER_ADDR]<br>";
 
 
         $result = mysqli_query($link,"Select * From BootcampTable.Messages");
